@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Account.module.css'
 
 function Account() {
-    var initState = JSON.parse(localStorage.getItem('account') || '{}');
+    let initState = JSON.parse(localStorage.getItem('account') || '{}');
     const [accountState, setAccount] = useState(initState);
 
     const handleFormSubmit=() => {
