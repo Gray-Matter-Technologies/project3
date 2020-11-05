@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 const DatePickerLayout = styled.div`
   position: absolute;
+  box-sizing: border-box;
+  width: 100%;
   top: 15px;
   left: 0;
   right: 0;

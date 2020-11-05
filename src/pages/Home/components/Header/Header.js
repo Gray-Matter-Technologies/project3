@@ -5,9 +5,9 @@ import taskman from "./elements/taskman.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter, Link } from "react-router-dom";
-import SignUpModal from './components/SignUpModal';
-import LogInModal from './components/LogInModal';
-import withAuth from '../../../../components/Auth/withAuth';
+import SignUpModal from "./components/SignUpModal";
+import LogInModal from "./components/LogInModal";
+import withAuth from "../../../../components/Auth/withAuth";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -142,7 +142,6 @@ const MenuWrapper = styled.div`
   }
 `;
 
-
 const StyledLink = styled(Link)`
   text-decoration: none;
 
@@ -155,16 +154,15 @@ const StyledLink = styled(Link)`
   }
 `;
 const MODAL = {
-  LOG_IN: 'LOG_IN',
-  SIGN_UP: 'SIGN_UP',
-  EMPTY: '',
-}
-
+  LOG_IN: "LOG_IN",
+  SIGN_UP: "SIGN_UP",
+  EMPTY: "",
+};
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       loggedIn: false,
       showMenu: false,
@@ -180,9 +178,9 @@ class Header extends React.Component {
       event.preventDefault();
 
       this.setState({
-        showModal:target,
+        showModal: target,
       });
-    }
+    };
   }
 
   setLoggedIn(loggedIn) {
@@ -196,12 +194,12 @@ class Header extends React.Component {
       showMenu,
     });
   }
-  
+
   render() {
     const { showModal } = this.state;
     let { loggedIn, showMenu } = this.state;
-    
-    console.log("<<<<<<<<<render===========",this.props.value);
+
+    console.log("<<<<<<<<<render===========", this.props.value);
     return (
       <HeaderWrapper>
         {showMenu && (
@@ -244,9 +242,8 @@ class Header extends React.Component {
                   Post a task
                 </StyledLink>
               </div>
-              <div>Categories</div>
+              <div>Map</div>
               <div>Browse tasks</div>
-              <div>How it works</div>
             </MenuWrapper>
           </HiddenMenu>
         )}
@@ -262,9 +259,8 @@ class Header extends React.Component {
               Post a task
             </StyledLink>
           </ButtonYellow>
-          <ButtonLeft>Categories</ButtonLeft>
+          <ButtonLeft>Map</ButtonLeft>
           <ButtonLeft>Browse tasks</ButtonLeft>
-          <ButtonLeft>How it works</ButtonLeft>
         </HeaderLeft>
         {!loggedIn && (
           <React.Fragment>
@@ -289,28 +285,25 @@ class Header extends React.Component {
             </AvatarContainer>
           ) : (
             <React.Fragment>
-              <ButtonRight onClick={this.showModal(MODAL.SIGN_UP)}>Sign up</ButtonRight>
-              <ButtonRight
-                onClick={() => {
-                  this.setLoggedIn(true);
-                }}
-                onClick={this.showModal(MODAL.LOG_IN)}
-              >
+              <ButtonRight onClick={this.showModal(MODAL.SIGN_UP)}>
+                Sign up
+              </ButtonRight>
+              <ButtonRight onClick={this.showModal(MODAL.LOG_IN)}>
                 Log in
               </ButtonRight>
               <ButtonWhite>Become a tasker</ButtonWhite>
 
               {showModal === MODAL.LOG_IN && (
-              <LogInModal
-              onClose={this.showModal(MODAL.EMPTY)}
-              onSignUp={this.showModal(MODAL.SIGN_UP)}
-              />
+                <LogInModal
+                  onClose={this.showModal(MODAL.EMPTY)}
+                  onSignUp={this.showModal(MODAL.SIGN_UP)}
+                />
               )}
               {showModal === MODAL.SIGN_UP && (
-              <SignUpModal
-              onClose={this.showModal(MODAL.EMPTY)}
-              onLogIn={this.showModal(MODAL.LOG_IN)}
-              />
+                <SignUpModal
+                  onClose={this.showModal(MODAL.EMPTY)}
+                  onLogIn={this.showModal(MODAL.LOG_IN)}
+                />
               )}
             </React.Fragment>
           )}

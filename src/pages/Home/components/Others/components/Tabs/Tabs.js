@@ -33,54 +33,48 @@ const Tab = styled.span`
     text-decoration: underline;
     color: #f3d250;
   }
-  ${(props) => {
-    if (props.active) {
-      return css`
-        border-bottom: 2px solid #f3d250;
-      `;
-    }
-  }}
 `;
 
-class Tabs extends React.Component {
-  render() {
-    const { activeTab, handleTabClick } = this.props;
-
-    return (
-      <Layout>
-        <Tab
-          active={activeTab === "HOME_CLEANING"}
-          onClick={() => handleTabClick("HOME_CLEANING")}
-        >
-          Home Cleaning
-        </Tab>
-        <Tab
-          active={activeTab === "BACKYARD_&_POOL"}
-          onClick={() => handleTabClick("BACKYARD_&_POOL")}
-        >
-          Backyard & Pool
-        </Tab>
-        <Tab
-          active={activeTab === "ROOF_&_PIPE"}
-          onClick={() => handleTabClick("ROOF_&_PIPE")}
-        >
-          Roof & Pipe
-        </Tab>
-        <Tab
-          active={activeTab === "APPLIANCE"}
-          onClick={() => handleTabClick("APPLIANCE")}
-        >
-          Appliance
-        </Tab>
-        <Tab
-          active={activeTab === "SOMETHING_DIFFERENT"}
-          onClick={() => handleTabClick("SOMETHING_DIFFERENT")}
-        >
-          Something different
-        </Tab>
-      </Layout>
-    );
-  }
+function Tabs({ onClick }) {
+  return (
+    <Layout>
+      <Tab
+        onClick={() => {
+          onClick();
+        }}
+      >
+        Home Cleaning
+      </Tab>
+      <Tab
+        onClick={() => {
+          onClick();
+        }}
+      >
+        Backyard & Pool
+      </Tab>
+      <Tab
+        onClick={() => {
+          onClick();
+        }}
+      >
+        Roof & Pipe
+      </Tab>
+      <Tab
+        onClick={() => {
+          onClick();
+        }}
+      >
+        Appliance
+      </Tab>
+      <Tab
+        onClick={() => {
+          onClick();
+        }}
+      >
+        Something different
+      </Tab>
+    </Layout>
+  );
 }
 
 export default Tabs;

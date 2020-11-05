@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DatePickerTool from "./components/DatePickerTool";
 import CurrencyInput from "react-currency-input-field";
-import api from '../../api';
-import withAuth from '../../components/Auth/withAuth';
+import api from "../../api";
+import withAuth from "../../components/Auth/withAuth";
 
 const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 60px;
   margin-right: 60px;
-  & > div {
-    border: 2px solid red;
-  }
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -35,7 +32,15 @@ const PartOne = styled.div`
     margin-bottom: 20px;
   }
 `;
-const TitleOne = styled.h3``;
+const TitleOne = styled.h3`
+  margin-top: 35px;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  padding: 8px;
+`;
 
 const PartTwo = styled.div`
   width: 30%;
@@ -53,6 +58,7 @@ const PartTwo = styled.div`
 
 const TitleTwo = styled.h3`
   margin-bottom: 20px;
+  margin-top: 35px;
 `;
 
 const DatePickerContainer = styled.div`
@@ -66,9 +72,17 @@ const PartThree = styled.div`
     margin-bottom: 20px;
     height: 380px;
   }
+  & > input {
+    margin-right: 5px;
+  }
+  & > label {
+    margin-right: 8px;
+  }
 `;
 
-const TitleThree = styled.h3``;
+const TitleThree = styled.h3`
+  margin-top: 35px;
+`;
 
 const GetQuote = styled.div`
   margin-top: 120px;
@@ -153,26 +167,23 @@ class PostTask extends React.Component {
     });
   }
 
-  handleSendTask(){
-
+  handleSendTask() {
     //调用后端接口，实现发送任务
-    api.post('/task/task',{
-      "email" : this.props.value.user.email,
-      "title" : this.state.taskName,
-      "budget" : parseInt(this.state.taskMoney),
-      "location" : this.state.taskAddress,
-      "date" : this.state.taskDate,
-      "details" : this.state.taskDetail
-    }).then(res=>{
-      if(res.status == 200){
-        //跳转到任务浏览页面 —— /browse-tasks 的页面，需要补充...
-
-      }
-      
-    });
-
+    api
+      .post("/task/task", {
+        email: this.props.value.user.email,
+        title: this.state.taskName,
+        budget: parseInt(this.state.taskMoney),
+        location: this.state.taskAddress,
+        date: this.state.taskDate,
+        details: this.state.taskDetail,
+      })
+      .then((res) => {
+        if (res.status == 200) {
+          //跳转到任务浏览页面 —— /browse-tasks 的页面，需要补充...
+        }
+      });
   }
-
 
   render() {
     const {
@@ -208,13 +219,13 @@ class PostTask extends React.Component {
             <br />
             <small>Be as specific as you can about what needs doing</small>
             <br />
-            <textarea
+            <TextArea
               type="text"
               value={taskDetail}
               onChange={(e) => {
                 this.setTaskDetail(e.target.value);
               }}
-            ></textarea>
+            ></TextArea>
           </label>
         </PartOne>
         <PartTwo>
@@ -247,7 +258,7 @@ class PostTask extends React.Component {
         <PartThree>
           <TitleThree>Suggest how much</TitleThree>
           <strong>What is your budget?</strong>
-          <br />
+          <br style={{ marginBottom: 500 }} />
           <input
             type="radio"
             onClick={() => {
@@ -265,6 +276,7 @@ class PostTask extends React.Component {
           />
           <label>Hourly rate</label>
           <CurrencyInput
+            style={{ marginTop: 10 }}
             id="input-example"
             name="input-name"
             placeholder="$1,000"
@@ -283,11 +295,7 @@ class PostTask extends React.Component {
                 <span>$ {this.state.taskMoney}</span>
               </RecRight>
             </YellowRectangle>
-            <button
-              onClick={this.handleSendTask.bind(this)}
-            >
-              Get quotes
-            </button>
+            <button onClick={this.handleSendTask.bind(this)}>Get quotes</button>
           </GetQuote>
         </PartThree>
       </Layout>

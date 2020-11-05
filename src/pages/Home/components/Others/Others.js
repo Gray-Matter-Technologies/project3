@@ -37,21 +37,25 @@ class Others extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: "FIXING_STUFF",
+      tabShown: true,
     };
   }
 
+  setTabShown(tabShown) {
+    this.setState({
+      tabShown,
+    });
+  }
+
   render() {
-    const { activeTab } = this.state;
+    const { tabShown } = this.state;
     return (
       <Wrapper>
         <SectionTitle>See what others are getting done</SectionTitle>
         <Tabs
-          activeTab={activeTab}
-          handleTabClick={(b) => {
-            this.setState({
-              activeTab,
-            });
+          onClick={() => {
+            /* 点击按钮之后调用setTabShown这个把手，把tabShown这个状态变成true */
+            this.setTabShown(true);
           }}
         />
         <TabDescription />
