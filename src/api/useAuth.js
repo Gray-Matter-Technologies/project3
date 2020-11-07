@@ -3,11 +3,12 @@ const AUTH_TOKEN = 'AUTH_TOKEN';
 
 const appendAuthTokenToRequest = (config) => {
   const authToken = localStorage.getItem(AUTH_TOKEN);
-
+  
   if (authToken) {
+    const Authstring = 'Bearer'+ ' ' + authToken
     config.headers = {
       ...config.headers,
-      'X-Auth-Token': localStorage.getItem(AUTH_TOKEN),
+      'Authorization': Authstring
     };
   }
 

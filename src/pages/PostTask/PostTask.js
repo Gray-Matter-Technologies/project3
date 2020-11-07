@@ -233,6 +233,12 @@ class PostTask extends React.Component {
 
   }
 
+  componentDidMount(){
+    if(localStorage.getItem('AUTH_TOKEN')===null){
+      this.props.history.push('/')
+      alert('please login')
+    }
+  }
 
   render() {
     const {

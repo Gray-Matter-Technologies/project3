@@ -21,12 +21,9 @@ class App extends React.Component{
   render(){
   return (
     <Fragment>
-
         <GlobalStyle />
-
         <Auth>
         <BrowserRouter>
-
           <Header />
           <Switch>
             <Route path="/" exact component={Home} />
